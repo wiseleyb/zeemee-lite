@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <title>ZeeMee Lite</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  </head>
+  <body>
+    <ul class="nav">
+      <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="/">ZeeMee Lite</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/feed_example">Feed</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/admin">Admin</a>
+      </li>
+       <li class="nav-item">
+         <a class="nav-link" href="/sidekiq">Sidekiq</a>
+       </li>
+    </ul>
+    <hr/>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

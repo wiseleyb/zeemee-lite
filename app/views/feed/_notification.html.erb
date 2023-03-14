@@ -1,0 +1,6 @@
+<h5 class="card-title">
+  Hey <%=link_to obj.user.name, admin_user_path(obj.user.id) %>
+</h5>
+<p class="card-text"><%=obj.notification%></p>
+<a href="<%=admin_notification_path(obj.id)%>"
+   class="btn btn-primary btn-sm">More Info</a>

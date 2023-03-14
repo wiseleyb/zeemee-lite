@@ -1,0 +1,33 @@
+<h3>User: <%=link_to @user.name, admin_user_path(@user.id)%></h3>
+
+<h4>Orgs</h4>
+<ul>
+  <% @user.orgs.order(:name).each do |org| %>
+    <li><%=link_to org.name, admin_org_path(org.id)%></li>
+  <% end %>
+</ul>
+
+<h4>Friends</h4>
+<ul>
+  <% @user.followed_users.each do |friend| %>
+    <li>
+      <%=link_to friend.name, admin_user_path(friend.id)%>
+      [<%=link_to 'feed', feed_example_index_path(user_id: friend.id) %>]
+    </li>
+  <% end %>
+</ul>
+
+<h4>Followers</h4>
+<ul>
+  <% @user.followers.each do |follower| %>
+    <li>
+      <%=link_to follower.name, admin_user_path(follower.id)%>
+      [<%=link_to 'feed', feed_example_index_path(user_id: follower.id) %>]
+    </li>
+  <% end %>
+</ul>
+
+<h4>Feed</h4>
+<ul>
+  <li>Feed Count: <%=@user.feed_items.count%></li>
+</ul>

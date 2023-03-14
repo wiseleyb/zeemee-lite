@@ -1,0 +1,49 @@
+version: '3.7'
+services:
+  web:
+    build: .
+    image: zeemee-lite
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    tty: true
+    environment:
+      - BOOTSNAP_CACHE_DIR=/usr/local/bundle/_bootsnap
+      - WEB_CONCURRENCY=1
+      - HISTFILE=/usr/src/app/.dockerdev/.bash_history
+      - MALLOC_ARENA_MAX=2
+      - REDIS_URL_CACHING=redis://redis:6379/0
+      - REDIS_URL_SIDEKIQ=redis://redis:6379/1
+      - REDIS_URL=redis://redis:6379/1
+    volumes:
+      - .:/usr/src/app/:cached
+      - rails_cache:/usr/src/app/tmp/cache
+      - node_modules:/usr/src/app/node_modules
+      - packs:/usr/src/app/public/packs
+    depends_on:
+      - redis
+  redis:
+    image: redis:latest
+    command: "redis-server"
+    ports:
+      - '6379:6379'
+    volumes:
+      - 'redis:/data'
+    # this will connect to your local dev box redis service
+    # command: ["redis-server", "--bind", "redis", "--port", "6379"]
+  sidekiq:
+    depends_on:
+      - 'redis'
+    build: .
+    command: bundle exec sidekiq
+    volumes:
+      - .:/usr/src/app
+      - '/usr/src/app/tmp' # don't mount tmp directory
+    environment:
+      - REDIS_URL_SIDEKIQ=redis://redis:6379/1
+volumes:
+  node_modules:
+  rails_cache:
+  packs:
+  redis:

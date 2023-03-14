@@ -1,0 +1,17 @@
+<h5 class="card-title"><%=link_to obj.title, admin_post_path(obj.id)%></h5>
+<p class="card-text">
+  <%=obj.body%>
+  <br/>
+  by <%= link_to obj.user.name, admin_user_path(obj.user.id) %>
+</p>
+<% if pc = obj.post_comments.last %>
+  <p class="card-text">
+    <%= link_to "Latest Comment:", admin_post_comment_path(pc.id) %>
+    <%= pc.comment %>
+    by
+    <%= link_to pc.user.name, admin_user_path(pc.user.id) %>
+  </p>
+<% end %>
+<a href="<%=admin_post_path(obj.id)%>" class="btn btn-primary btn-sm">
+  See <%=obj.post_comments.count %> Comments
+</a>

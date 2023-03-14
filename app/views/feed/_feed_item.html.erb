@@ -1,0 +1,19 @@
+<% # using https://getbootstrap.com/docs/5.0/components/card/ %>
+<% bgcolor = FeedService.border_color(feed_item) %>
+<div class="card" style="border: solid 3px <%=bgcolor%>;">
+  <div class="card-header">
+    <%= feed_item.feedable.class.name %>
+  </div>
+  <div class="card-body">
+    <%= render partial: "feed/#{feed_item.feedable.class.name.underscore}",
+      locals: { obj: feed_item.feedable } %>
+  </div>
+  <div class="card-footer text-muted">
+    <% if feed_item.ad_unit? %>
+      <%= feed_item.created_at %>
+    <% else %>
+      <%= feed_item.feedable.created_at %>
+    <% end %>
+  </div>
+</div>
+<br/>

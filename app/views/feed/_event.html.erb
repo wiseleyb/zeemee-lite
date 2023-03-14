@@ -1,0 +1,9 @@
+<h5 class="card-title">
+  <%=link_to obj.org.name, admin_org_path(obj.org.id) %>:
+  <%=link_to obj.title, admin_event_path(obj.id)%>
+</h5>
+<p class="card-text"><%=obj.description%></p>
+<p class="card-text">Happening @ <%=obj.event_date.to_s(:db)%></p>
+<a href="<%=admin_event_path(obj.id)%>" class="btn btn-primary btn-sm">
+  View Event
+</a>

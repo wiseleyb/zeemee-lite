@@ -1,0 +1,41 @@
+<style>
+.pagination span {
+  border: solid 1px black;
+  margin: 2px;
+  padding: 2px 5px;
+}
+</style>
+<div class="container">
+  <div class="row">
+    <p>A terrible feed example - just as a starting point. Shows basic layout
+    helpers for feed items.</p>
+
+    <div class="col">
+      <h1>API Feed</h1>
+      <div>
+        <p>See
+        <%=link_to 'Api/JSON',
+          feed_example_index_path(user_id: @user.id, format: :json) %>
+        for API results</p>
+        <%= paginate @feed_items, params: { format: :json } %>
+        <p>
+          <%=link_to 'All Feed Items Api/JSON',
+            feed_example_index_path(user_id: @user.id, per: 10_000, format: :json) %>
+        </p>
+      </div>
+
+      <hr/>
+
+      <h1>Feed</h1>
+      <%= paginate @feed_items %>
+      <hr/>
+      <%= render partial: 'feed/feed_item', collection: @feed_items %>
+      <hr/>
+      <%= paginate @feed_items %>
+    </div>
+
+    <div class="col">
+      <%= render partial: 'feed/user' %>
+    </div>
+  </div>
+</div>

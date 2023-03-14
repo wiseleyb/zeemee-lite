@@ -1,0 +1,11 @@
+<h5 class="card-title">
+  <%=link_to "Comment on: #{obj.post.title}", admin_post_path(obj.post.id)%>
+</h5>
+<p class="card-text">
+  Post:  <%=link_to obj.post.title, admin_post_path(obj.post.id) %>
+  by <%= link_to obj.post.user.name, admin_user_path(obj.post.user.name) %>
+  <hr/>
+  Comment: <%=obj.comment%>
+  <br/>
+  by <%= link_to obj.user.name, admin_user_path(obj.user.id) %>
+</p>
