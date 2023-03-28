@@ -156,5 +156,5 @@ Notes:
 
 # How to submit
 
-Ideally, we'd like you to `fork` this repro to your github account and just send us a URL when you're done. However, we'll also accept a `diff` or a `.zip` file of the completed project.
+Send us a `diff` or a `.zip` file of the completed project. Do not `fork` this repro. 
 
