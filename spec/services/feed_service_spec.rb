@@ -45,6 +45,7 @@ RSpec.describe FeedService, type: :service do
         it 'inserts an ad every FeedService::AD_INTERVAL' do
           i = FeedService::AD_INTERVAL
           feed_items = FeedService.new(current_user.id).feed_items
+          expect(feed_items.class.name).to eq('ActiveRecord::Relation')
           expect(feed_items[i].ad_unit?).to be_truthy
           expect(feed_items[i + FeedService::AD_INTERVAL + 1].ad_unit?).to \
             be_truthy
